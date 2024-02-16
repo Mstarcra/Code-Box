@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生成12位數隨機代碼</title>
+    <style>
+        body {
+            background-color: #343434;
+            color: #FFF;
+        }
+
+        div{
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <h1>產生12位的亂數代碼(由英文大小寫及數字組成)</h1>
+
+        <input type="text" value="" name="" id="code" placeholder="輸入要生產幾組">
+        <button class="btn btn-dark " onclick="generateCouponCode()">
+            產生代碼
+        </button>
+        
+    </div>
+    <h2>每一組會用逗號隔開,最後一組沒有,</h2>
+    <div>
+        <textarea name="" id="result" cols="24" rows="30"></textarea>
+    </div>
+    
+    <script>
+
+        //產生代碼
+        function generateCouponCode() {
+            var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            var codeNumber = document.getElementById('code').value;
+            var codeLength = 12;
+            var createdCodes = [];
+            var createCodes = '';
+
+            for (var j = 0; j < codeNumber; j++) {
+                var Code = '';
+                do {
+                    Code = '';
+                    for (var i = 0; i < codeLength; i++) {
+                        var randomIndex = Math.floor(Math.random() * characters.length);
+                        //   回傳characters當中的隨機一值
+                        Code += characters.charAt(randomIndex);
+                    }
+                } while (createdCodes.includes(Code));
+
+                createdCodes.push(Code);
+                createCodes += Code;
+
+                // 加入逗號
+                if (j < codeNumber - 1) {
+                    createCodes += ',';
+                }
+            }
+
+            document.getElementById('result').innerText = createCodes;
+
+        }
+    </script>
+</body>
+
+</html>
